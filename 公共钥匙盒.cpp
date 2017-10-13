@@ -105,14 +105,16 @@ int getPivot(Event* eventSets, int low, int high) {
 		while (low<high && ((eventSets[high].time > pivotKey.time) ||
 			(eventSets[high].time == pivotKey.time && eventSets[high].isPick && !pivotKey.isPick) ||
 			(eventSets[high].time == pivotKey.time && !eventSets[high].isPick && !pivotKey.isPick &&
-				eventSets[high].keys > pivotKey.keys)))
+			eventSets[high].keys > pivotKey.keys) || (eventSets[high].time == pivotKey.time &&
+			eventSets[high].isPick && pivotKey.isPick)))
 			high--;
 		eventSets[low] = eventSets[high];
 
 		while (low<high && ((eventSets[low].time < pivotKey.time) ||
 			(eventSets[low].time == pivotKey.time && !eventSets[low].isPick && pivotKey.isPick) ||
 			(eventSets[low].time == pivotKey.time && !eventSets[low].isPick && !pivotKey.isPick &&
-				eventSets[low].keys < pivotKey.keys)))
+			eventSets[low].keys < pivotKey.keys) || (eventSets[low].time == pivotKey.time &&
+				eventSets[low].isPick && pivotKey.isPick)))
 			low++;
 		eventSets[high] = eventSets[low];
 	}
